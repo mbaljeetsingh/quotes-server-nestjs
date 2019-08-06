@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { QuotesService } from './quotes.service';
 import { CreateQuoteDto } from './dto/create-quote.dto';
+import { Quote } from './interfaces/quote.interface';
 
 @Controller('quotes')
 export class QuotesController {
@@ -11,7 +12,7 @@ export class QuotesController {
   }
 
   @Post()
-  createQuote(@Body() createQuoteDto: CreateQuoteDto): any {
+  createQuote(@Body() createQuoteDto: CreateQuoteDto): Quote {
     return this.quotesService.createQuote(createQuoteDto);
   }
 }
