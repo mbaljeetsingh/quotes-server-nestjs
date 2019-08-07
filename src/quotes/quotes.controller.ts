@@ -17,13 +17,13 @@ import { ApiUseTags, ApiImplicitParam } from '@nestjs/swagger';
 export class QuotesController {
   constructor(private quotesService: QuotesService) {}
   @Get()
-  getQuotes(): Quote[] {
+  getQuotes(): Promise<Quote[]> {
     return this.quotesService.getQuotes();
   }
 
   @ApiImplicitParam({ name: 'id' })
   @Get(':id')
-  getQuote(@Param('id') id): Quote {
+  getQuote(@Param('id') id): Promise<Quote> {
     return this.quotesService.getQuote(id);
   }
 
@@ -34,13 +34,16 @@ export class QuotesController {
 
   @ApiImplicitParam({ name: 'id' })
   @Put(':id')
-  updateQuote(@Param('id') id, @Body() updateQuoteDto: CreateQuoteDto): Quote {
+  updateQuote(
+    @Param('id') id,
+    @Body() updateQuoteDto: CreateQuoteDto,
+  ): Promise<Quote> {
     return this.quotesService.updateQuote(id, updateQuoteDto);
   }
 
   @ApiImplicitParam({ name: 'id' })
   @Delete(':id')
-  deleteQuote(@Param('id') id): Quote {
+  deleteQuote(@Param('id') id): Promise<any> {
     return this.quotesService.deleteQuote(id);
   }
 }
