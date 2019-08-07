@@ -28,7 +28,7 @@ export class QuotesController {
   }
 
   @Post()
-  createQuote(@Body() createQuoteDto: CreateQuoteDto): Quote {
+  createQuote(@Body() createQuoteDto: CreateQuoteDto): Promise<Quote> {
     return this.quotesService.createQuote(createQuoteDto);
   }
 
