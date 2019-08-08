@@ -6,6 +6,7 @@ import {
   Param,
   Put,
   Delete,
+  Logger,
 } from '@nestjs/common';
 import { QuotesService } from './quotes.service';
 import { CreateQuoteDto } from './dto/create-quote.dto';
@@ -18,12 +19,14 @@ export class QuotesController {
   constructor(private quotesService: QuotesService) {}
   @Get()
   getQuotes(): Promise<Quote[]> {
+    Logger.log('New Quotes API Request');
     return this.quotesService.getQuotes();
   }
 
   @ApiImplicitParam({ name: 'id' })
   @Get(':id')
   getQuote(@Param('id') id): Promise<Quote> {
+    Logger.log('New Quotes API Request');
     return this.quotesService.getQuote(id);
   }
 
