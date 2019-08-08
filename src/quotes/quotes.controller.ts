@@ -7,6 +7,8 @@ import {
   Put,
   Delete,
   Logger,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { QuotesService } from './quotes.service';
 import { CreateQuoteDto } from './dto/create-quote.dto';
@@ -29,8 +31,12 @@ export class QuotesController {
   }
 
   @Post()
-  createQuote(@Body() createQuoteDto: CreateQuoteDto): Promise<Quote> {
-    return this.quotesService.createQuote(createQuoteDto);
+  async createQuote(@Body() createQuoteDto: CreateQuoteDto): Promise<Quote> {
+    try {
+      return await this.quotesService.createQuote(createQuoteDto);
+    } catch (err) {
+      throw new HttpException(err.message, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
   }
 
   @ApiImplicitParam({ name: 'id' })

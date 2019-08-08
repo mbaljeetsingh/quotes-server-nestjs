@@ -19,8 +19,8 @@ export class QuotesService {
     }
   }
 
-  async createQuote(quote: Quote): Promise<Quote> {
-    const newQuote = await new this.quoteModel(quote);
+  createQuote(quote: Quote): Promise<Quote> {
+    const newQuote = new this.quoteModel(quote);
     return newQuote.save();
   }
 
