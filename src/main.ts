@@ -13,6 +13,7 @@ async function bootstrap() {
     .setDescription('Quotes API Description')
     .setVersion('0.1')
     .addTag('quotes')
+    .setSchemes('http', 'https')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
